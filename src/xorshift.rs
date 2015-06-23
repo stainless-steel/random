@@ -1,4 +1,4 @@
-use Source;
+use Generator;
 
 /// The Xorshift+ algorithm.
 ///
@@ -13,14 +13,14 @@ pub struct XorshiftPlus {
 }
 
 impl XorshiftPlus {
-    /// Create a source of randomness.
+    /// Create a generator.
     #[inline(always)]
     pub fn new(seed: [u64; 2]) -> XorshiftPlus {
         XorshiftPlus { state: seed }
     }
 }
 
-impl Source for XorshiftPlus {
+impl Generator for XorshiftPlus {
     #[inline(always)]
     fn read(&mut self) -> u64 {
         let (mut x, y) = (self.state[0], self.state[1]);

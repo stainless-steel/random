@@ -1,21 +1,21 @@
 //! Sources of randomness.
 
-/// A random quantity.
-pub trait Quantity {
-    /// Make up a random quantity.
-    fn make(u64) -> Self;
-}
-
 /// A source of randomness.
-pub trait Source {
+pub trait Generator {
     /// Read the next chunk.
     fn read(&mut self) -> u64;
 
     /// Read the next quantity.
     #[inline(always)]
-    fn next<T>(&mut self) -> T where T: Quantity {
+    fn next<T: Quantity>(&mut self) -> T {
         Quantity::make(self.read())
     }
+}
+
+/// A random quantity.
+pub trait Quantity {
+    /// Make up a random quantity.
+    fn make(u64) -> Self;
 }
 
 impl Quantity for f64 {
@@ -38,12 +38,12 @@ pub use xorshift::XorshiftPlus;
 
 #[cfg(test)]
 mod tests {
-    use {Source, XorshiftPlus};
+    use {Generator, XorshiftPlus};
 
     #[test]
     fn read() {
-        let mut source = XorshiftPlus::new([42, 42]);
-        let _ = source.next::<f64>();
-        let _ = source.next::<u64>();
+        let mut generator = XorshiftPlus::new([42, 42]);
+        let _ = generator.next::<f64>();
+        let _ = generator.next::<u64>();
     }
 }
