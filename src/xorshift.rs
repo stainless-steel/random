@@ -1,14 +1,19 @@
 use Source;
 
-/// The Xorshift+ algorithm [1].
+/// The Xorshift+ algorithm.
 ///
-/// 1. https://en.wikipedia.org/wiki/Xorshift#Xorshift.2B
+/// ## References
+///
+/// 1. Sebastiano Vigna, “Further Scramblings of Marsaglia’s Xorshift
+///    Generators,” CoRR, 2014.
+///
+/// 2. https://en.wikipedia.org/wiki/Xorshift
 pub struct XorshiftPlus {
     state: [u64; 2],
 }
 
 impl XorshiftPlus {
-    /// Create a generator.
+    /// Create a source of randomness.
     #[inline(always)]
     pub fn new(seed: [u64; 2]) -> XorshiftPlus {
         XorshiftPlus { state: seed }
@@ -17,7 +22,7 @@ impl XorshiftPlus {
 
 impl Source for XorshiftPlus {
     #[inline(always)]
-    fn next(&mut self) -> u64 {
+    fn read(&mut self) -> u64 {
         let (mut x, y) = (self.state[0], self.state[1]);
 
         self.state[0] = y;

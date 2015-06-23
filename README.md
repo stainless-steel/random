@@ -1,6 +1,6 @@
 # Random [![Version][version-img]][version-url] [![Status][status-img]][status-url]
 
-The packages provides means of generating random numbers.
+The packages provides sources of randomness.
 
 ## [Documentation][docs]
 
