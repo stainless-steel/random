@@ -3,9 +3,9 @@ use {Generator, Source};
 // The implementation is based on:
 // http://www.seehuhn.de/pages/ziggurat
 
-/// The [Ziggurat][1] algorithm.
+/// The Ziggurat algorithm [1].
 ///
-/// [1]: https://en.wikipedia.org/wiki/Ziggurat_algorithm
+/// 1. https://en.wikipedia.org/wiki/Ziggurat_algorithm
 pub struct Ziggurat<S> where S: Source {
     source: S,
 }

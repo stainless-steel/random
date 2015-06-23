@@ -1,8 +1,8 @@
 use Source;
 
-/// The [Xorshift+][1] algorithm.
+/// The Xorshift+ algorithm [1].
 ///
-/// [1]: https://en.wikipedia.org/wiki/Xorshift#Xorshift.2B
+/// 1. https://en.wikipedia.org/wiki/Xorshift#Xorshift.2B
 pub struct XorshiftPlus {
     state: [u64; 2],
 }
