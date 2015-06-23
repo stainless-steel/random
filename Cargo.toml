@@ -1,8 +1,12 @@
 [package]
 name = "random"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["Ivan Ukhov <ivan.ukhov@gmail.com>"]
 license = "MIT"
-repository = "https://github.com/hilbert-space/random"
-homepage = "https://github.com/hilbert-space/random"
-description = "Random."
+repository = "https://github.com/stainless-steel/random"
+homepage = "https://github.com/stainless-steel/random"
+documentation = "https://stainless-steel.github.io/random"
+description = "The package provides means of generating random numbers."
+
+[dev-dependencies]
+assert = "*"
