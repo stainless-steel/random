@@ -21,7 +21,7 @@ pub trait Quantity {
 impl Quantity for f64 {
     #[inline(always)]
     fn make(chunk: u64) -> f64 {
-        chunk as f64 / (std::f64::MAX as f64 + 1.0)
+        chunk as f64 / (std::u64::MAX as f64 + 1.0)
     }
 }
 
