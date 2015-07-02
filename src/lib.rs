@@ -1,13 +1,13 @@
 //! Sources of randomness.
-///
-/// ## Example
-///
-/// ```
-/// use random::Source;
-///
-/// let mut source = random::default().seed([42, 69]);
-/// let uniforms = source.iter().take(100).collect::<Vec<f64>>();
-/// ```
+//!
+//! ## Example
+//!
+//! ```
+//! use random::Source;
+//!
+//! let mut source = random::default().seed([42, 69]);
+//! let uniforms = source.iter().take(100).collect::<Vec<f64>>();
+//! ```
 
 use std::cell::RefCell;
 use std::marker::PhantomData;
