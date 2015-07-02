@@ -90,7 +90,7 @@ mod tests {
     use {Generator, XorshiftPlus};
 
     #[test]
-    fn read() {
+    fn next() {
         let mut generator = XorshiftPlus::new([42, 69]);
         let _ = generator.next::<f64>();
         let _ = generator.next::<u64>();
