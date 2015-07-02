@@ -3,10 +3,10 @@
 /// ## Example
 ///
 /// ```
-/// use random::Generator;
+/// use random::Source;
 ///
-/// let mut generator = random::default().seed([42, 69]);
-/// let uniforms = generator.iter().take(100).collect::<Vec<f64>>();
+/// let mut source = random::default().seed([42, 69]);
+/// let uniforms = source.iter().take(100).collect::<Vec<f64>>();
 /// ```
 
 use std::cell::RefCell;
@@ -14,7 +14,7 @@ use std::marker::PhantomData;
 use std::rc::Rc;
 
 /// A source of randomness.
-pub trait Generator: Sized {
+pub trait Source: Sized {
     /// Return the next raw chunk.
     fn read(&mut self) -> u64;
 
@@ -27,13 +27,13 @@ pub trait Generator: Sized {
     /// Return a sequence of quantities.
     #[inline]
     fn iter<'l, T: Quantity>(&'l mut self) -> Sequence<'l, Self, T> {
-        Sequence { generator: self, phantom: PhantomData }
+        Sequence { source: self, phantom: PhantomData }
     }
 }
 
 /// A sequence of random quantities.
-pub struct Sequence<'l, G, Q> where G: Generator + 'l, Q: Quantity + 'l {
-    generator: &'l mut G,
+pub struct Sequence<'l, G, Q> where G: Source + 'l, Q: Quantity + 'l {
+    source: &'l mut G,
     phantom: PhantomData<&'l Q>,
 }
 
@@ -43,12 +43,12 @@ pub trait Quantity {
     fn make(u64) -> Self;
 }
 
-impl<'l, G, Q> Iterator for Sequence<'l, G, Q> where G: Generator, Q: Quantity {
+impl<'l, G, Q> Iterator for Sequence<'l, G, Q> where G: Source, Q: Quantity {
     type Item = Q;
 
     #[inline(always)]
     fn next(&mut self) -> Option<Q> {
-        Some(self.generator.take())
+        Some(self.source.take())
     }
 }
 
@@ -78,7 +78,7 @@ impl Default {
     }
 }
 
-impl Generator for Default {
+impl Source for Default {
     #[inline(always)]
     fn read(&mut self) -> u64 {
         self.0.borrow_mut().read()
@@ -95,7 +95,7 @@ pub fn default() -> Default {
     thread_local!(static DEFAULT: Rc<RefCell<XorshiftPlus>> = {
         Rc::new(RefCell::new(XorshiftPlus::new([42, 69])))
     });
-    Default(DEFAULT.with(|generator| generator.clone()))
+    Default(DEFAULT.with(|source| source.clone()))
 }
 
 mod xorshift;
