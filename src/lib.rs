@@ -1,4 +1,13 @@
 //! Sources of randomness.
+///
+/// ## Example
+///
+/// ```
+/// use random::Generator;
+///
+/// let mut generator = random::default().seed([42, 69]);
+/// let uniforms = (0..100).map(|_| generator.next::<f64>()).collect::<Vec<_>>();
+/// ```
 
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -41,7 +50,7 @@ pub struct Default(Rc<RefCell<XorshiftPlus>>);
 impl Default {
     /// Seed the generator.
     #[inline(always)]
-    pub fn seed(&mut self, seed: [u64; 2]) -> &mut Default {
+    pub fn seed(self, seed: [u64; 2]) -> Default {
         *self.0.borrow_mut() = XorshiftPlus::new(seed);
         self
     }
