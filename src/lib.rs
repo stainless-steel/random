@@ -14,7 +14,7 @@ use std::marker::PhantomData;
 use std::rc::Rc;
 
 /// A source of randomness.
-pub trait Source: Sized {
+pub trait Source {
     /// Return the next raw chunk.
     fn read(&mut self) -> u64;
 
@@ -32,8 +32,8 @@ pub trait Source: Sized {
 }
 
 /// A sequence of random quantities.
-pub struct Sequence<'l, G, Q> where G: Source + 'l, Q: Quantity + 'l {
-    source: &'l mut G,
+pub struct Sequence<'l, S: ?Sized, Q> where S: Source + 'l, Q: Quantity + 'l {
+    source: &'l mut S,
     phantom: PhantomData<&'l Q>,
 }
 
@@ -43,7 +43,7 @@ pub trait Quantity {
     fn make(u64) -> Self;
 }
 
-impl<'l, G, Q> Iterator for Sequence<'l, G, Q> where G: Source, Q: Quantity {
+impl<'l, S, Q> Iterator for Sequence<'l, S, Q> where S: Source, Q: Quantity {
     type Item = Q;
 
     #[inline(always)]
