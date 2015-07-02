@@ -4,6 +4,15 @@ The packages provides sources of randomness.
 
 ## [Documentation][docs]
 
+## Example
+
+```rust
+use random::Generator;
+
+let mut generator = random::default().seed([42, 69]);
+let uniforms = (0..100).map(|_| generator.next::<f64>()).collect::<Vec<_>>();
+```
+
 ## Contributing
 
 1. Fork the project.
