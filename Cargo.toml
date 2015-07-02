@@ -7,6 +7,3 @@ repository = "https://github.com/stainless-steel/random"
 homepage = "https://github.com/stainless-steel/random"
 documentation = "https://stainless-steel.github.io/random"
 description = "The package provides sources of randomness."
-
-[dependencies]
-probability = "*"
