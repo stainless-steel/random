@@ -7,10 +7,10 @@ The packages provides sources of randomness.
 ## Example
 
 ```rust
-use random::Generator;
+use random::Source;
 
-let mut generator = random::default().seed([42, 69]);
-let uniforms = (0..100).map(|_| generator.next::<f64>()).collect::<Vec<_>>();
+let mut source = random::default().seed([42, 69]);
+let uniforms = source.iter().take(100).collect::<Vec<f64>>();
 ```
 
 ## Contributing
