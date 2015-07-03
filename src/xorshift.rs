@@ -14,8 +14,11 @@ pub struct XorshiftPlus {
 
 impl XorshiftPlus {
     /// Create an instance of the algorithm.
+    ///
+    /// The seed should not be zero everywhere.
     #[inline(always)]
     pub fn new(seed: [u64; 2]) -> XorshiftPlus {
+        debug_assert!(seed[0] | seed[1] != 0, "the seed should not be zero everywhere");
         XorshiftPlus { state: seed }
     }
 }
@@ -32,5 +35,16 @@ impl Source for XorshiftPlus {
         self.state[1] = x;
 
         x.wrapping_add(y)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::XorshiftPlus;
+
+    #[test]
+    #[should_panic]
+    fn new_zero_seed() {
+        let _ = XorshiftPlus::new([0, 0]);
     }
 }
