@@ -25,7 +25,7 @@ pub trait Source {
     }
 
     /// Return a sequence of quantities.
-    #[inline]
+    #[inline(always)]
     fn iter<'l, T: Quantity>(&'l mut self) -> Sequence<'l, Self, T> {
         Sequence { source: self, phantom: PhantomData }
     }
