@@ -20,13 +20,13 @@ pub trait Source {
 
     /// Return the next quantity.
     #[inline(always)]
-    fn take<T: Quantity>(&mut self) -> T where Self: Sized {
+    fn take<T: Quantity>(&mut self) -> T {
         Quantity::make(self.read())
     }
 
     /// Return a sequence of quantities.
     #[inline]
-    fn iter<'l, T: Quantity>(&'l mut self) -> Sequence<'l, Self, T> where Self: Sized {
+    fn iter<'l, T: Quantity>(&'l mut self) -> Sequence<'l, Self, T> {
         Sequence { source: self, phantom: PhantomData }
     }
 }
