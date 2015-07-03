@@ -71,6 +71,8 @@ pub struct Default(Rc<RefCell<XorshiftPlus>>);
 
 impl Default {
     /// Seed the source.
+    ///
+    /// The seed should not be zero everywhere.
     #[inline(always)]
     pub fn seed(self, seed: [u64; 2]) -> Default {
         *self.0.borrow_mut() = XorshiftPlus::new(seed);
