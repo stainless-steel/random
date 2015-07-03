@@ -66,8 +66,8 @@ impl Quantity for u64 {
     }
 }
 
-/// The default source, which is the Xorshift+ algorithm.
-pub struct Default(Rc<RefCell<XorshiftPlus>>);
+/// The default source, which is the Xorshift128+ algorithm.
+pub struct Default(Rc<RefCell<Xorshift128Plus>>);
 
 impl Default {
     /// Seed the source.
@@ -75,7 +75,7 @@ impl Default {
     /// The seed should not be zero everywhere.
     #[inline(always)]
     pub fn seed(self, seed: [u64; 2]) -> Default {
-        *self.0.borrow_mut() = XorshiftPlus::new(seed);
+        *self.0.borrow_mut() = Xorshift128Plus::new(seed);
         self
     }
 }
@@ -94,11 +94,11 @@ impl Source for Default {
 /// each thread is responsible for reseeding its source.
 #[inline(always)]
 pub fn default() -> Default {
-    thread_local!(static DEFAULT: Rc<RefCell<XorshiftPlus>> = {
-        Rc::new(RefCell::new(XorshiftPlus::new([42, 69])))
+    thread_local!(static DEFAULT: Rc<RefCell<Xorshift128Plus>> = {
+        Rc::new(RefCell::new(Xorshift128Plus::new([42, 69])))
     });
     Default(DEFAULT.with(|source| source.clone()))
 }
 
 mod xorshift;
-pub use self::xorshift::XorshiftPlus;
+pub use self::xorshift::Xorshift128Plus;
