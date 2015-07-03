@@ -15,10 +15,10 @@ pub struct Xorshift128Plus {
 impl Xorshift128Plus {
     /// Create an instance of the algorithm.
     ///
-    /// The seed should not be zero everywhere.
+    /// At least one bit of the seed should be nonzero.
     #[inline(always)]
     pub fn new(seed: [u64; 2]) -> Xorshift128Plus {
-        debug_assert!(seed[0] | seed[1] != 0, "the seed should not be zero everywhere");
+        debug_assert!(seed[0] | seed[1] != 0, "at least one bit of the seed should be nonzero");
         Xorshift128Plus { state: seed }
     }
 }
