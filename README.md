@@ -10,7 +10,8 @@ The packages provides sources of randomness.
 use random::Source;
 
 let mut source = random::default().seed([42, 69]);
-let uniforms = source.iter().take(100).collect::<Vec<f64>>();
+let one_uniform = source.read::<f64>();
+let many_uniforms = source.iter().take(100).collect::<Vec<f64>>();
 ```
 
 ## Contributing

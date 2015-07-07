@@ -6,7 +6,8 @@
 //! use random::Source;
 //!
 //! let mut source = random::default().seed([42, 69]);
-//! let uniforms = source.iter().take(100).collect::<Vec<f64>>();
+//! let one_uniform = source.read::<f64>();
+//! let many_uniforms = source.iter().take(100).collect::<Vec<f64>>();
 //! ```
 
 use std::cell::RefCell;
@@ -24,13 +25,13 @@ pub trait Source {
         self.read_u64() as f64 / (::std::u64::MAX as f64 + 1.0)
     }
 
-    /// Return the next quantity.
+    /// Read the next quantity.
     #[inline(always)]
-    fn take<T: Quantity>(&mut self) -> T where Self: Sized {
+    fn read<T: Quantity>(&mut self) -> T where Self: Sized {
         Quantity::from(self)
     }
 
-    /// Return a sequence of quantities.
+    /// Read a sequence of quantities.
     #[inline(always)]
     fn iter<'l, T: Quantity>(&'l mut self) -> Sequence<'l, Self, T> where Self: Sized {
         Sequence { source: self, phantom: PhantomData }
@@ -54,7 +55,7 @@ impl<'l, S, Q> Iterator for Sequence<'l, S, Q> where S: Source, Q: Quantity {
 
     #[inline(always)]
     fn next(&mut self) -> Option<Q> {
-        Some(self.source.take())
+        Some(self.source.read())
     }
 }
 
