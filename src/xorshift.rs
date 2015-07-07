@@ -25,7 +25,7 @@ impl Xorshift128Plus {
 
 impl Source for Xorshift128Plus {
     #[inline(always)]
-    fn read(&mut self) -> u64 {
+    fn read_u64(&mut self) -> u64 {
         let (mut x, y) = (self.state[0], self.state[1]);
 
         self.state[0] = y;

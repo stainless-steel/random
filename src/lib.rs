@@ -15,18 +15,24 @@ use std::rc::Rc;
 
 /// A source of randomness.
 pub trait Source {
-    /// Return the next raw chunk.
-    fn read(&mut self) -> u64;
+    /// Read the next `u64`.
+    fn read_u64(&mut self) -> u64;
+
+    /// Read the next `f64`.
+    #[inline(always)]
+    fn read_f64(&mut self) -> f64 {
+        self.read_u64() as f64 / (::std::u64::MAX as f64 + 1.0)
+    }
 
     /// Return the next quantity.
     #[inline(always)]
-    fn take<T: Quantity>(&mut self) -> T {
-        Quantity::make(self.read())
+    fn take<T: Quantity>(&mut self) -> T where Self: Sized {
+        Quantity::from(self)
     }
 
     /// Return a sequence of quantities.
     #[inline(always)]
-    fn iter<'l, T: Quantity>(&'l mut self) -> Sequence<'l, Self, T> {
+    fn iter<'l, T: Quantity>(&'l mut self) -> Sequence<'l, Self, T> where Self: Sized {
         Sequence { source: self, phantom: PhantomData }
     }
 }
@@ -39,8 +45,8 @@ pub struct Sequence<'l, S: ?Sized, Q> where S: Source + 'l, Q: Quantity + 'l {
 
 /// A random quantity.
 pub trait Quantity {
-    /// Make up a quantity from a raw chunk.
-    fn make(u64) -> Self;
+    /// Create a quantity from a source.
+    fn from<T: Source>(&mut T) -> Self;
 }
 
 impl<'l, S, Q> Iterator for Sequence<'l, S, Q> where S: Source, Q: Quantity {
@@ -54,15 +60,15 @@ impl<'l, S, Q> Iterator for Sequence<'l, S, Q> where S: Source, Q: Quantity {
 
 impl Quantity for f64 {
     #[inline(always)]
-    fn make(chunk: u64) -> f64 {
-        chunk as f64 / (::std::u64::MAX as f64 + 1.0)
+    fn from<T: Source>(source: &mut T) -> f64 {
+        source.read_f64()
     }
 }
 
 impl Quantity for u64 {
     #[inline(always)]
-    fn make(chunk: u64) -> u64 {
-        chunk
+    fn from<T: Source>(source: &mut T) -> u64 {
+        source.read_u64()
     }
 }
 
@@ -82,8 +88,8 @@ impl Default {
 
 impl Source for Default {
     #[inline(always)]
-    fn read(&mut self) -> u64 {
-        self.0.borrow_mut().read()
+    fn read_u64(&mut self) -> u64 {
+        self.0.borrow_mut().read_u64()
     }
 }
 
