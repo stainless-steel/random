@@ -75,6 +75,7 @@ impl Quantity for u64 {
 }
 
 /// The default source, which is the Xorshift128+ algorithm.
+#[derive(Clone)]
 pub struct Default(Rc<RefCell<Xorshift128Plus>>);
 
 impl Default {

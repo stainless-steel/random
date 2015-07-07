@@ -8,6 +8,7 @@ use Source;
 ///    Generators,” CoRR, 2014.
 ///
 /// 2. https://en.wikipedia.org/wiki/Xorshift#Xorshift.2B
+#[derive(Clone, Copy)]
 pub struct Xorshift128Plus {
     state: [u64; 2],
 }
