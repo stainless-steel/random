@@ -6,8 +6,9 @@
 //! use random::Source;
 //!
 //! let mut source = random::default().seed([42, 69]);
-//! let one_uniform = source.read::<f64>();
-//! let many_uniforms = source.iter().take(100).collect::<Vec<f64>>();
+//!
+//! let one = source.read::<f64>();
+//! let two = source.iter().take(2).collect::<Vec<f64>>();
 //! ```
 
 use std::cell::RefCell;
