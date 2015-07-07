@@ -32,48 +32,48 @@ pub trait Source {
         self.read_u64() as f64 / (::std::u64::MAX as f64 + 1.0)
     }
 
-    /// Read a random quantity.
+    /// Read a random element.
     #[inline(always)]
-    fn read<T: Quantity>(&mut self) -> T where Self: Sized {
-        Quantity::from(self)
+    fn read<T: Element>(&mut self) -> T where Self: Sized {
+        Element::from(self)
     }
 
-    /// Read a sequence of random quantities.
+    /// Read a sequence of random elements.
     #[inline(always)]
-    fn iter<'l, T: Quantity>(&'l mut self) -> Sequence<'l, Self, T> where Self: Sized {
+    fn iter<'l, T: Element>(&'l mut self) -> Sequence<'l, Self, T> where Self: Sized {
         Sequence { source: self, phantom: PhantomData }
     }
 }
 
-/// A sequence of random quantities.
-pub struct Sequence<'l, S: ?Sized, Q> where S: Source + 'l, Q: Quantity + 'l {
+/// A sequence of random elements.
+pub struct Sequence<'l, S: ?Sized, E> where S: Source + 'l, E: Element + 'l {
     source: &'l mut S,
-    phantom: PhantomData<&'l Q>,
+    phantom: PhantomData<&'l E>,
 }
 
-/// A random quantity.
-pub trait Quantity {
-    /// Create a quantity from a source.
+/// A random element.
+pub trait Element {
+    /// Create a random element from a source.
     fn from<T: Source>(&mut T) -> Self;
 }
 
-impl<'l, S, Q> Iterator for Sequence<'l, S, Q> where S: Source, Q: Quantity {
-    type Item = Q;
+impl<'l, S, E> Iterator for Sequence<'l, S, E> where S: Source, E: Element {
+    type Item = E;
 
     #[inline(always)]
-    fn next(&mut self) -> Option<Q> {
+    fn next(&mut self) -> Option<E> {
         Some(self.source.read())
     }
 }
 
-impl Quantity for f64 {
+impl Element for f64 {
     #[inline(always)]
     fn from<T: Source>(source: &mut T) -> f64 {
         source.read_f64()
     }
 }
 
-impl Quantity for u64 {
+impl Element for u64 {
     #[inline(always)]
     fn from<T: Source>(source: &mut T) -> u64 {
         source.read_u64()
