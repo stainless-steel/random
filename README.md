@@ -24,5 +24,5 @@ will be licensed according to the terms given in [LICENSE.md](LICENSE.md).
 [doc]: https://stainless-steel.github.io/random
 [status-img]: https://travis-ci.org/stainless-steel/random.svg?branch=master
 [status-url]: https://travis-ci.org/stainless-steel/random
-[version-img]: http://stainless-steel.github.io/images/crates.svg
+[version-img]: https://img.shields.io/crates/v/random.svg
 [version-url]: https://crates.io/crates/random
