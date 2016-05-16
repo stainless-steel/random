@@ -2,7 +2,7 @@
 
 The packages provides sources of randomness.
 
-## [Documentation][docs]
+## [Documentation][doc]
 
 ## Example
 
@@ -15,14 +15,14 @@ let one = source.read::<f64>();
 let two = source.iter().take(2).collect::<Vec<f64>>();
 ```
 
-## Contributing
+## Contribution
 
-1. Fork the project.
-2. Implement your idea.
-3. Open a pull request.
+Your contribution is highly appreciated. Do not hesitate to open an issue or a
+pull request. Note that any contribution submitted for inclusion in the project
+will be licensed according to the terms given in [LICENSE.md](LICENSE.md).
 
-[version-img]: http://stainless-steel.github.io/images/crates.svg
-[version-url]: https://crates.io/crates/random
+[doc]: https://stainless-steel.github.io/random
 [status-img]: https://travis-ci.org/stainless-steel/random.svg?branch=master
 [status-url]: https://travis-ci.org/stainless-steel/random
-[docs]: https://stainless-steel.github.io/random
+[version-img]: http://stainless-steel.github.io/images/crates.svg
+[version-url]: https://crates.io/crates/random
