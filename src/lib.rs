@@ -106,7 +106,6 @@ impl Source for Default {
 /// Each thread has its own copy of the source, and each copy is initialized
 /// with the same default seed. Consequently, the usage is thread safe; however,
 /// each thread is responsible for reseeding its source.
-#[inline(always)]
 pub fn default() -> Default {
     thread_local!(static DEFAULT: Rc<RefCell<Xorshift128Plus>> = {
         Rc::new(RefCell::new(Xorshift128Plus::new([42, 69])))
