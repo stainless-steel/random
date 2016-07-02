@@ -11,73 +11,7 @@
 //! ```
 
 use std::cell::RefCell;
-use std::marker::PhantomData;
 use std::rc::Rc;
-
-/// A source of randomness.
-pub trait Source {
-    /// Read a random `u64`.
-    ///
-    /// The implied distribution is a discrete uniform distribution over
-    /// `{0, 1, …, u64::MAX}`.
-    fn read_u64(&mut self) -> u64;
-
-    /// Read a random `f64`.
-    ///
-    /// The implied distribution is a continuous uniform distribution over
-    /// `[0, 1]`.
-    #[inline(always)]
-    fn read_f64(&mut self) -> f64 {
-        self.read_u64() as f64 / ::std::u64::MAX as f64
-    }
-
-    /// Read a random value.
-    #[inline(always)]
-    fn read<T: Value>(&mut self) -> T where Self: Sized {
-        Value::from(self)
-    }
-
-    /// Read a sequence of random values.
-    #[inline(always)]
-    fn iter<'l, T: Value>(&'l mut self) -> Sequence<'l, Self, T> where Self: Sized {
-        Sequence { source: self, phantom: PhantomData }
-    }
-}
-
-/// A sequence of random values.
-pub struct Sequence<'l, S: ?Sized, V> where S: Source + 'l, V: Value + 'l {
-    source: &'l mut S,
-    phantom: PhantomData<&'l V>,
-}
-
-/// A random value.
-pub trait Value {
-    /// Create a random value from a source.
-    fn from<T: Source>(&mut T) -> Self;
-}
-
-impl<'l, S, V> Iterator for Sequence<'l, S, V> where S: Source, V: Value {
-    type Item = V;
-
-    #[inline(always)]
-    fn next(&mut self) -> Option<V> {
-        Some(self.source.read())
-    }
-}
-
-impl Value for f64 {
-    #[inline(always)]
-    fn from<T: Source>(source: &mut T) -> f64 {
-        source.read_f64()
-    }
-}
-
-impl Value for u64 {
-    #[inline(always)]
-    fn from<T: Source>(source: &mut T) -> u64 {
-        source.read_u64()
-    }
-}
 
 /// The default source, which is the Xorshift128+ algorithm.
 #[derive(Clone)]
@@ -113,6 +47,12 @@ pub fn default() -> Default {
     Default(DEFAULT.with(|source| source.clone()))
 }
 
+mod sequence;
+mod source;
+mod value;
 mod xorshift;
 
-pub use self::xorshift::Xorshift128Plus;
+pub use sequence::Sequence;
+pub use source::Source;
+pub use value::Value;
+pub use xorshift::Xorshift128Plus;
