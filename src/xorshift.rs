@@ -1,4 +1,4 @@
-use Source;
+use source::Source;
 
 /// The Xorshift128+ algorithm.
 ///
