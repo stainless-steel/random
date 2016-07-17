@@ -11,7 +11,7 @@ macro_rules! implement(
         $(impl Value for $kind {
             #[inline(always)]
             fn read<S>(source: &mut S) -> Self where S: Source {
-                source.read_f64() as $kind
+                source.$reader() as $kind
             }
         })*
     }
