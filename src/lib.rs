@@ -6,8 +6,8 @@
 //! use random::Source;
 //!
 //! let mut source = random::default().seed([42, 69]);
-//! let one = source.read::<f64>();
-//! let two = source.iter().take(2).collect::<Vec<f64>>();
+//! println!("Scalar: {:?}", source.read::<f64>());
+//! println!("Vector: {:?}", source.iter().take(2).collect::<Vec<f64>>());
 //! ```
 
 use std::cell::RefCell;

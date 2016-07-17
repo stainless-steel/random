@@ -2,7 +2,7 @@ use source::Source;
 
 /// A random value.
 pub trait Value {
-    /// Read a value from a source.
+    /// Read a random value.
     fn read<S>(&mut S) -> Self where S: Source;
 }
 
