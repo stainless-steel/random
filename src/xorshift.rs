@@ -9,32 +9,28 @@ use Source;
 ///
 /// 2. https://en.wikipedia.org/wiki/Xorshift#xorshift.2B
 #[derive(Clone, Copy)]
-pub struct Xorshift128Plus {
-    state: [u64; 2],
-}
+pub struct Xorshift128Plus(u64, u64);
 
 impl Xorshift128Plus {
     /// Create an instance of the algorithm.
     ///
-    /// At least one bit of the seed should be nonzero.
+    /// At least one bit of the seed should be one.
     #[inline(always)]
     pub fn new(seed: [u64; 2]) -> Xorshift128Plus {
-        debug_assert!(seed[0] | seed[1] != 0, "at least one bit of the seed should be nonzero");
-        Xorshift128Plus { state: seed }
+        debug_assert!(seed[0] | seed[1] != 0, "at least one bit of the seed should be one");
+        Xorshift128Plus(seed[0], seed[1])
     }
 }
 
 impl Source for Xorshift128Plus {
     #[inline(always)]
     fn read_u64(&mut self) -> u64 {
-        let (mut x, y) = (self.state[0], self.state[1]);
-
-        self.state[0] = y;
+        let (mut x, y) = (self.0, self.1);
+        self.0 = y;
         x = x ^ (x << 23);
         x = x ^ (x >> 17);
         x = x ^ y ^ (y >> 26);
-        self.state[1] = x;
-
+        self.1 = x;
         x.wrapping_add(y)
     }
 }
