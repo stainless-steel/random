@@ -1,7 +1,6 @@
 use std::marker::PhantomData;
 
-use source::Source;
-use value::Value;
+use {Source, Value};
 
 /// A random sequence.
 pub struct Sequence<'l, S: ?Sized, V> where S: Source + 'l, V: Value + 'l {

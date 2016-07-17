@@ -1,6 +1,6 @@
-use source::Source;
+use Source;
 
-/// The Xorshift128+ algorithm.
+/// An instance of the Xorshift128+ algorithm.
 ///
 /// ## References
 ///
@@ -41,7 +41,7 @@ impl Source for Xorshift128Plus {
 
 #[cfg(test)]
 mod tests {
-    use super::Xorshift128Plus;
+    use Xorshift128Plus;
 
     #[test]
     #[should_panic]

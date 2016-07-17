@@ -1,4 +1,4 @@
-use source::Source;
+use Source;
 
 /// A random value.
 pub trait Value {

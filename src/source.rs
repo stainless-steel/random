@@ -1,5 +1,4 @@
-use sequence::Sequence;
-use value::Value;
+use {Sequence, Value};
 
 /// A source of randomness.
 pub trait Source {
