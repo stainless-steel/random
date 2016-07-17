@@ -3,16 +3,10 @@ use value::Value;
 
 /// A source of randomness.
 pub trait Source {
-    /// Read a random `u64`.
-    ///
-    /// The implied distribution is a discrete uniform distribution over
-    /// `{0, 1, …, u64::MAX}`.
+    /// Read `u64` uniformly distributed over `{0, 1, …, u64::MAX}`.
     fn read_u64(&mut self) -> u64;
 
-    /// Read a random `f64`.
-    ///
-    /// The implied distribution is a continuous uniform distribution over
-    /// `[0, 1]`.
+    /// Read `f64` uniformly distributed over `[0, 1]`.
     #[inline(always)]
     fn read_f64(&mut self) -> f64 {
         self.read_u64() as f64 / ::std::u64::MAX as f64
