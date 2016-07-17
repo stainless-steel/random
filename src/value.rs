@@ -28,7 +28,19 @@ mod tests {
     #[test]
     fn read() {
         let mut source = Xorshift128Plus::new([42, 69]);
-        let _ = source.read::<i8>();
-        let _ = i8::read(&mut source);
+
+        macro_rules! read(
+            ($($kind:ident => [$one:expr, $two:expr],)*) => ({$(
+                assert_eq!(source.read::<$kind>(), $one);
+                assert_eq!($kind::read(&mut source), $two);
+            )*});
+        );
+
+        read! {
+            i8 => [52, -34],
+            i16 => [-17348, -1036],
+            i32 => [948125133, -1432682055],
+            i64 => [-6330235019914458621, -4877218639256617945],
+        }
     }
 }
