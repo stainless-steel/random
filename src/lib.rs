@@ -25,7 +25,7 @@ pub use xorshift::Xorshift128Plus;
 
 /// Create an instance of the default source.
 ///
-/// For futher details, see `Default::new`.
+/// For further information, see `Default::new`.
 #[inline(always)]
 pub fn default() -> Default {
     Default::new()
