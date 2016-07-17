@@ -6,16 +6,28 @@ pub trait Value {
     fn from<S>(&mut S) -> Self where S: Source;
 }
 
-impl Value for f64 {
-    #[inline(always)]
-    fn from<S>(source: &mut S) -> Self where S: Source {
-        source.read_f64()
+macro_rules! implement(
+    ($reader:ident as $($kind:ty),*) => {
+        $(impl Value for $kind {
+            #[inline(always)]
+            fn from<S>(source: &mut S) -> Self where S: Source {
+                source.read_f64() as $kind
+            }
+        })*
     }
-}
+);
 
-impl Value for u64 {
-    #[inline(always)]
-    fn from<S>(source: &mut S) -> Self where S: Source {
-        source.read_u64()
+implement!(read_f64 as f32, f64);
+implement!(read_u64 as i8, i16, i32, i64, isize);
+implement!(read_u64 as u8, u16, u32, u64, usize);
+
+#[cfg(test)]
+mod tests {
+    use {Source, Xorshift128Plus};
+
+    #[test]
+    fn from() {
+        let mut source = Xorshift128Plus::new([42, 69]);
+        let _ = source.read::<i8>();
     }
 }
