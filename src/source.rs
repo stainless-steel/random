@@ -15,7 +15,7 @@ pub trait Source {
     /// Read a random value.
     #[inline(always)]
     fn read<V>(&mut self) -> V where Self: Sized, V: Value {
-        Value::from(self)
+        Value::read(self)
     }
 
     /// Read a sequence of random values.
