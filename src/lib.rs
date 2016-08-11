@@ -10,14 +10,13 @@
 //! println!("Vector: {:?}", source.iter().take(2).collect::<Vec<f64>>());
 //! ```
 
-#[path = "default.rs"]
-mod default_;
+mod default;
 mod sequence;
 mod source;
 mod value;
 mod xorshift;
 
-pub use default_::Default;
+pub use default::Default;
 pub use sequence::Sequence;
 pub use source::Source;
 pub use value::Value;
