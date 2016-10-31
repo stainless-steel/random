@@ -1,9 +1,9 @@
 [package]
 name = "random"
-version = "0.12.1"
+version = "0.12.2"
 license = "Apache-2.0/MIT"
 authors = ["Ivan Ukhov <ivan.ukhov@gmail.com>"]
 description = "The package provides sources of randomness."
-documentation = "https://stainless-steel.github.io/random"
+documentation = "https://docs.rs/random"
 homepage = "https://github.com/stainless-steel/random"
 repository = "https://github.com/stainless-steel/random"

@@ -6,12 +6,5 @@ rust:
   - beta
   - nightly
 
-after_success:
-  - curl https://stainless-steel.github.io/travis/documentation.sh | bash
-
-env:
-  global:
-    - secure: uh2SSX5023qNmjiNlq3boj/pZP7hDum3UTXFZlkBfMAb1qDhe/sMdD8nN5/Zfs2Va+qk2l1XRfTL1xwYev/+nJxysE1kqfEssUPMJBByIbe/66NgpMB7LYSXZbTj098VjfYIAmfKa3PSqCtgo1dNlyXJAK/AwY6N1vvksIy23K/FnFgU+GZlKzk+yeQMzgpri+lhV50PYxy2yiO4ZUj9VhyB7DIds4c/Tb03z5hmx0tkr/3SckRVBD5FVvfVRr7sd5wi9O51N+Nt4KAWMHGF6Wu3qiIAfCrs0yF7O9WrqngORROGDi8Ql4ErNbunG6z2Qz2piUKaTLjiSTWNHXf3Qzf6VMcJOgdTwXbn6SXp+THzvvRbR0C4vbayf931aWrI5s3+PYc50I+MRiL7uHsxOQy1J7gXuYmT4PkN09J8ZcoEpgb/w9kAYMMfmtMQZJaUqH0utF0XpZ8+c/w5Lj5W2/2P+Wqx3LLnXKCJISZP/zPrp5l/DPkevMugqwGaXGXEvyd0SuoVDMwnGwDc7rzxXIyR3bXgf2tyrLwf8JxWW4XtZexf41tJwtKymoIo72Oc6ATUqydkF9GIIqVqb+9lIk0Ubu7/GnWG3gCR3ZoLJ3SWQ+4SQqTTPm3jPaoXlngIczUnFuPgueZlpfPQIfJ6FZrJ1G40SZQmvZKKBdzBPbw=
-
 notifications:
   email: false
