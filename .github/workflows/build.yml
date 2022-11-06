@@ -23,7 +23,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions-rs/cargo@v1
         with: {command: test}
-      - uses: actions-rs/toolchain@v1
 
   ubuntu:
     runs-on: ubuntu-latest
@@ -31,4 +30,3 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions-rs/cargo@v1
         with: {command: test}
-      - uses: actions-rs/toolchain@v1
