@@ -3,7 +3,9 @@ use Source;
 /// A random value.
 pub trait Value {
     /// Read a random value.
-    fn read<S>(&mut S) -> Self where S: Source;
+    fn read<S>(&mut S) -> Self
+    where
+        S: Source;
 }
 
 macro_rules! implement(

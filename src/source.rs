@@ -13,13 +13,21 @@ pub trait Source {
 
     /// Read a random value.
     #[inline(always)]
-    fn read<V>(&mut self) -> V where Self: Sized, V: Value {
+    fn read<V>(&mut self) -> V
+    where
+        Self: Sized,
+        V: Value,
+    {
         Value::read(self)
     }
 
     /// Read a sequence of random values.
     #[inline(always)]
-    fn iter<'l, V>(&'l mut self) -> Sequence<'l, Self, V> where Self: Sized, V: Value {
+    fn iter<'l, V>(&'l mut self) -> Sequence<'l, Self, V>
+    where
+        Self: Sized,
+        V: Value,
+    {
         From::from(self)
     }
 }

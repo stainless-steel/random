@@ -17,7 +17,10 @@ impl Xorshift128Plus {
     /// At least one bit of the seed should be one.
     #[inline(always)]
     pub fn new(seed: [u64; 2]) -> Xorshift128Plus {
-        debug_assert!(seed[0] | seed[1] != 0, "at least one bit of the seed should be one");
+        debug_assert!(
+            seed[0] | seed[1] != 0,
+            "at least one bit of the seed should be one"
+        );
         Xorshift128Plus(seed[0], seed[1])
     }
 }
