@@ -8,7 +8,7 @@ pub trait Source {
     /// Read `f64` uniformly distributed over `[0, 1]`.
     #[inline(always)]
     fn read_f64(&mut self) -> f64 {
-        self.read_u64() as f64 / ::std::u64::MAX as f64
+        self.read_u64() as f64 / ::core::u64::MAX as f64
     }
 
     /// Read a random value.
