@@ -1,8 +1,6 @@
-# Random [![Version][version-img]][version-url] [![Status][status-img]][status-url]
+# Random [![Package][package-img]][package-url] [![Documentation][documentation-img]][documentation-url] [![Build][build-img]][build-url]
 
 The packages provides sources of randomness.
-
-## [Documentation][documentation]
 
 ## Example
 
@@ -20,8 +18,9 @@ Your contribution is highly appreciated. Do not hesitate to open an issue or a
 pull request. Note that any contribution submitted for inclusion in the project
 will be licensed according to the terms given in [LICENSE.md](LICENSE.md).
 
-[documentation]: https://docs.rs/random
-[status-img]: https://travis-ci.org/stainless-steel/random.svg?branch=master
-[status-url]: https://travis-ci.org/stainless-steel/random
-[version-img]: https://img.shields.io/crates/v/random.svg
-[version-url]: https://crates.io/crates/random
+[build-img]: https://github.com/stainless-steel/random/workflows/build/badge.svg
+[build-url]: https://github.com/stainless-steel/random/actions/workflows/build.yml
+[documentation-img]: https://docs.rs/random/badge.svg
+[documentation-url]: https://docs.rs/random
+[package-img]: https://img.shields.io/crates/v/random.svg
+[package-url]: https://crates.io/crates/random
