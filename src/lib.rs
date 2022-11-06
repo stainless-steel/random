@@ -29,5 +29,5 @@ pub use Xorshift128Plus as Default;
 /// The default source is the Xorshift128+ algorithm.
 #[inline(always)]
 pub fn default(seed: u64) -> Default {
-    Xorshift128Plus::new([seed, seed])
+    Xorshift128Plus::new([seed.wrapping_sub(1), seed.wrapping_add(1)])
 }
