@@ -3,7 +3,7 @@ use Source;
 /// A random value.
 pub trait Value {
     /// Read a random value.
-    fn read<S>(&mut S) -> Self
+    fn read<S>(_: &mut S) -> Self
     where
         S: Source;
 }
