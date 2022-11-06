@@ -7,7 +7,7 @@ The packages provides sources of randomness.
 ```rust
 use random::Source;
 
-let mut source = random::default().seed([42, 69]);
+let mut source = random::default([42, 69]);
 println!("Scalar: {:?}", source.read::<f64>());
 println!("Vector: {:?}", source.iter().take(2).collect::<Vec<f64>>());
 ```
