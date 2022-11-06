@@ -5,7 +5,7 @@
 //! ```
 //! use random::Source;
 //!
-//! let mut source = random::default([42, 69]);
+//! let mut source = random::default(42);
 //! println!("Scalar: {:?}", source.read::<f64>());
 //! println!("Vector: {:?}", source.iter().take(2).collect::<Vec<f64>>());
 //! ```
@@ -28,6 +28,6 @@ pub use Xorshift128Plus as Default;
 ///
 /// The default source is the Xorshift128+ algorithm.
 #[inline(always)]
-pub fn default(seed: [u64; 2]) -> Default {
-    Xorshift128Plus::new(seed)
+pub fn default(seed: u64) -> Default {
+    Xorshift128Plus::new([seed, seed])
 }
