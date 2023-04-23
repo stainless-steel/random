@@ -20,7 +20,7 @@ where
     #[inline(always)]
     fn from(source: &'l mut S) -> Self {
         Sequence {
-            source: source,
+            source,
             phantom: PhantomData,
         }
     }

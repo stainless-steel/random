@@ -23,7 +23,7 @@ pub trait Source {
 
     /// Read a sequence of random values.
     #[inline(always)]
-    fn iter<'l, V>(&'l mut self) -> Sequence<'l, Self, V>
+    fn iter<V>(&mut self) -> Sequence<'_, Self, V>
     where
         Self: Sized,
         V: Value,
