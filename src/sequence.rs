@@ -1,6 +1,6 @@
 use core::marker::PhantomData;
 
-use {Source, Value};
+use crate::{Source, Value};
 
 /// A random sequence.
 pub struct Sequence<'l, S: ?Sized, V>

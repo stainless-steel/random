@@ -1,4 +1,4 @@
-use Source;
+use crate::Source;
 
 /// A random value.
 pub trait Value {
@@ -25,7 +25,7 @@ implement!(read_u64 as u8, u16, u32, u64, usize);
 
 #[cfg(test)]
 mod tests {
-    use {Source, Value, Xorshift128Plus};
+    use crate::{Source, Value, Xorshift128Plus};
 
     #[test]
     fn read() {

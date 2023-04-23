@@ -1,4 +1,4 @@
-use {Sequence, Value};
+use crate::{Sequence, Value};
 
 /// A source of randomness.
 pub trait Source {

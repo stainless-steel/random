@@ -1,4 +1,4 @@
-use Source;
+use crate::Source;
 
 /// An instance of the Xorshift128+ algorithm.
 ///
@@ -40,7 +40,7 @@ impl Source for Xorshift128Plus {
 
 #[cfg(test)]
 mod tests {
-    use Xorshift128Plus;
+    use crate::Xorshift128Plus;
 
     #[test]
     #[should_panic]
