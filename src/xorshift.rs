@@ -38,6 +38,13 @@ impl Source for Xorshift128Plus {
     }
 }
 
+impl Into<[u64; 2]> for Xorshift128Plus {
+    #[inline(always)]
+    fn into(self) -> [u64; 2] {
+        [self.0, self.1]
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use crate::Xorshift128Plus;
