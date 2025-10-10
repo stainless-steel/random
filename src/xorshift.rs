@@ -16,7 +16,7 @@ impl Xorshift128Plus {
     ///
     /// At least one bit of the seed should be one.
     #[inline(always)]
-    pub fn new(seed: [u64; 2]) -> Xorshift128Plus {
+    pub fn new(seed: [u64; 2]) -> Self {
         debug_assert!(
             seed[0] | seed[1] != 0,
             "at least one bit of the seed should be one"
@@ -38,10 +38,17 @@ impl Source for Xorshift128Plus {
     }
 }
 
-impl Into<[u64; 2]> for Xorshift128Plus {
+impl From<[u64; 2]> for Xorshift128Plus {
     #[inline(always)]
-    fn into(self) -> [u64; 2] {
-        [self.0, self.1]
+    fn from(seed: [u64; 2]) -> Self {
+        Self::new(seed)
+    }
+}
+
+impl From<Xorshift128Plus> for [u64; 2] {
+    #[inline(always)]
+    fn from(source: Xorshift128Plus) -> Self {
+        [source.0, source.1]
     }
 }
 
