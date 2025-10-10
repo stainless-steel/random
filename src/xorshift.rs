@@ -7,7 +7,7 @@ use crate::Source;
 /// 1. Sebastiano Vigna, “Further Scramblings of Marsaglia’s Xorshift
 ///    Generators,” CoRR, 2014.
 ///
-/// 2. https://en.wikipedia.org/wiki/Xorshift#xorshift.2B
+/// 2. <https://en.wikipedia.org/wiki/Xorshift#xorshift.2B>
 #[derive(Clone, Copy)]
 pub struct Xorshift128Plus(u64, u64);
 
