@@ -13,10 +13,9 @@ jobs:
   check:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions-rs/toolchain@v1
-        with: {toolchain: stable, components: clippy, rustfmt}
-      - run: cargo clippy -- -D warnings
+      - uses: actions/checkout@v5
+      - run: rustup toolchain install stable --profile=minimal --component clippy --component rustfmt
+      - run: cargo clippy --all-features -- -D warnings
       - run: cargo fmt --all -- --check
 
   test:
@@ -25,7 +24,6 @@ jobs:
         os: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions-rs/toolchain@v1
-        with: {toolchain: stable}
-      - run: cargo test
+      - uses: actions/checkout@v5
+      - run: rustup toolchain install stable --profile=minimal
+      - run: cargo test --all-features
